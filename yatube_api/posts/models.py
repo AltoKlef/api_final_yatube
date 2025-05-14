@@ -49,13 +49,13 @@ class Follow(models.Model):
         on_delete=models.CASCADE
     )
 
-    '''class Meta:
+    class Meta:
         constraints = [
             models.UniqueConstraint(
                 fields=['user', 'following'],
                 name='unique_follow'
             )
-        ]'''
+        ]
 
     def __str__(self):
         return f"{self.user} follows {self.following}"
