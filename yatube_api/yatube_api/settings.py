@@ -18,6 +18,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
+    'rest_framework_simplejwt',
+    'djoser',
     'api',
     'posts',
 ]
@@ -91,10 +94,27 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = ((BASE_DIR / 'static/'),)
 
 REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
-    ],
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ]
 }
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+SIMPLE_JWT = {
+    'AUTH_HEADER_TYPES': ('Bearer', 'JWT'),
+}
+
+
+DJOSER = {
+    'LOGIN_FIELD': 'username',
+    'SERIALIZERS': {
+        'user_create': 'djoser.serializers.UserCreateSerializer',
+        'user': 'djoser.serializers.UserSerializer',
+        'current_user': 'djoser.serializers.UserSerializer',
+    },
+    'TOKEN_MODEL': None,  # Отключаем стандартную Token-модель, т.к. используем JWT
+}
