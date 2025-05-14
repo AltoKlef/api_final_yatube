@@ -9,3 +9,4 @@ PyJWT==2.1.0
 requests==2.26.0
 djoser==2.1.0
 social-auth-core==4.3.0
+drf-nested-routers==0.94.1
